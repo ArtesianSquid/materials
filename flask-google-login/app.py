@@ -26,6 +26,17 @@ GOOGLE_DISCOVERY_URL = (
     "https://accounts.google.com/.well-known/openid-configuration"
 )
 
+# Configuration using Secrets File
+secrets_file = "../../Secret.json"
+with open(secrets_file, "r") as in_file:
+    secrets=json.load(in_file)
+
+    GOOGLE_CLIENT_ID = secrets["web"]["client_id"]
+    GOOGLE_CLIENT_SECRET = secrets["web"]["client_secret"]
+    GOOGLE_DISCOVERY_URL= (
+        "https://accounts.google.com/.well-known/openid-configuration"
+    )
+
 # Flask app setup
 app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY") or os.urandom(24)
